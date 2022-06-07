@@ -1,0 +1,53 @@
+{
+    "parser": "@typescript-eslint/parser",
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".ts", ".tsx"],
+          "moduleDirectory": ["node_modules", "src"]
+        }
+      },
+      "react": {
+        "version": "detect"
+      }
+    },
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended",
+      "prettier"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+    },
+    "plugins": ["@emotion", "react"],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "arrow-parens": "off",
+      "camelcase": "off",
+      "react/destructuring-assignment": "warn",
+      "react/jsx-props-no-spreading": "warn",
+      "no-use-before-define": "off"
+    },
+    "overrides": [
+      {
+        "files": ["*.js"],
+        "rules": {
+          "@typescript-eslint/no-var-requires": "off",
+          "@typescript-eslint/explicit-function-return-type": "off",
+          "@typescript-eslint/explicit-module-boundary-types": "off"
+        }
+      },
+      {
+        "files": ["*.tsx"],
+        "rules": {
+          "react/prop-types": "off"
+        }
+      }
+    ]
+  }
