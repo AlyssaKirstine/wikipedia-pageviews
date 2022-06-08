@@ -42,7 +42,10 @@ const ArticleList = ({
       setArticles(response.data.items[0].articles.slice(0, numberOfResults));
     };
 
-    fetchData().catch(console.error);
+    fetchData().catch(() => {
+      setArticles([]);
+      return console.error;
+    });
   }, [date, numberOfResults]);
 
   useEffect(() => {
@@ -104,8 +107,8 @@ const ArticleList = ({
         </ul>
       </div>
       <div css={cardContainerStyles}>
-        {!articles ? (
-          <p>loading article list</p>
+        {!articles?.length ? (
+          <p>Bummer! 😞 There are no results for that date.</p>
         ) : (
           articles.map(({ article: name, rank, views }) => {
             return (

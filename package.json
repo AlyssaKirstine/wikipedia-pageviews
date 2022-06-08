@@ -2,8 +2,9 @@
   "name": "wikipedia-pageviews",
   "version": "1.0.0",
   "private": true,
-  "description": "wikipedia-pageviews",
-  "author": "Alyssa Melendez",
+  "description": "A Wikipedia pageviews application",
+  "repository": "git@github.com:AlyssaKirstine/wikipedia-pageviews.git",
+  "author": "Alyssa Melendez <alyssakirstine@gmail.com>",
   "keywords": [
     "gatsby"
   ],
