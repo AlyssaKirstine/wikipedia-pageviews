@@ -54,6 +54,7 @@ const HomePage = () => {
           </select>
         </div>
       </div>
+      <br />
       <ArticleList date={date} numberOfResults={numberOfResults} />
     </Layout>
   );

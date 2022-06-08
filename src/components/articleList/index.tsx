@@ -6,6 +6,8 @@ import {
   cardContainerStyles,
   cardStyles,
   nameStyles,
+  pinIconStyles,
+  pinnedArticlesStyles,
   rankStyles,
 } from './style';
 
@@ -23,6 +25,7 @@ const ArticleList = ({
   numberOfResults: number;
 }) => {
   const [articles, setArticles] = useState<Array<ArticleType>>();
+  const [pinnedArticles, setPinnedArticles] = useState<Array<string>>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,25 +44,94 @@ const ArticleList = ({
     fetchData().catch(console.error);
   }, [date, numberOfResults]);
 
+  useEffect(() => {
+    const storedArticles = localStorage.getItem('articles');
+    if (storedArticles) setPinnedArticles(JSON.parse(storedArticles));
+  }, []);
+
+  const handlePinClick = (name: string) => {
+    addArticleToLocalStorage(name);
+  };
+
+  const formatArticleName = (name: string) => {
+    return name.replaceAll('_', ` `);
+  };
+
+  const getArticleUrl = (name: string) => {
+    return `https://en.wikipedia.org/wiki/${name}`;
+  };
+
+  const addArticleToLocalStorage = (name: string) => {
+    let newArticlesArray: Array<string> = [];
+    const storedArticles = localStorage.getItem('articles');
+
+    if (storedArticles) {
+      newArticlesArray = JSON.parse(storedArticles);
+      if (newArticlesArray.find((element) => element === name))
+        alert(
+          `You've already pinned this article. Why don't you explore something new?`,
+        );
+      else newArticlesArray.push(name);
+    }
+    setPinnedArticles(newArticlesArray);
+    localStorage.setItem('articles', JSON.stringify(newArticlesArray));
+  };
+
+  const removeArticleFromLocalStorage = (name: string) => {
+    let newArticlesArray: Array<string> = [];
+    const storedArticles = localStorage.getItem('articles');
+
+    if (storedArticles) {
+      newArticlesArray = JSON.parse(storedArticles);
+      newArticlesArray = newArticlesArray.filter((value) => value !== name);
+      setPinnedArticles(newArticlesArray);
+      localStorage.setItem('articles', JSON.stringify(newArticlesArray));
+    }
+  };
+
   return (
-    <div css={cardContainerStyles}>
-      {!articles ? (
-        <p>loading article list</p>
-      ) : (
-        articles.map(({ article: name, rank, views }) => {
-          return (
-            <div key={name} css={cardStyles}>
-              <p css={rankStyles}>
-                <strong>#{rank}</strong>
-              </p>
-              <h2 css={nameStyles}>
-                <a href={`https://en.wikipedia.org/wiki/${name}`}>{name}</a>
-              </h2>
-              <p>{views} views</p>
-            </div>
-          );
-        })
-      )}
+    <div>
+      <div css={pinnedArticlesStyles}>
+        <p>
+          <strong>Pins:</strong>
+        </p>
+        <p>Click the 📌 icon to save an article here.</p>
+        <ul>
+          {pinnedArticles?.map((article) => (
+            <li key={article}>
+              <a href={getArticleUrl(article)}>{formatArticleName(article)}</a>{' '}
+              <button onClick={() => removeArticleFromLocalStorage(article)}>
+                delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div css={cardContainerStyles}>
+        {!articles ? (
+          <p>loading article list</p>
+        ) : (
+          articles.map(({ article: name, rank, views }) => {
+            return (
+              <div key={name} css={cardStyles}>
+                <button
+                  onClick={() => handlePinClick(name)}
+                  css={pinIconStyles}
+                >
+                  📌
+                </button>
+                <p css={rankStyles}>
+                  <strong>#{rank}</strong>
+                </p>
+                <h2 css={nameStyles}>
+                  <a href={getArticleUrl(name)}>{formatArticleName(name)}</a>
+                </h2>
+                <p>{views} views</p>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
