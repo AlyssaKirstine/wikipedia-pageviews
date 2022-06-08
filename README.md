@@ -1,54 +1,70 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal TypeScript starter
+<div align="center">
+<h1>
+  Wikipedia Pageviews 👀
 </h1>
+  <p>Wikipedia Pageviews is a single-page application that allows users to pick and date and see which Wikipedia pages were viewed the most that day. They can also save articles they want to come back to as pins.</p>
+      <p>Created by <a href="https://github.com/AlyssaKirstine">@AlyssaKirstine</a></p>
+  </div>
 
-## 🚀 Quick start
+## 🕵️ Technical Details
 
-1.  **Create a Gatsby site.**
+Wikipedia Pageviews was built using the [Gatsby](https://www.gatsbyjs.com/) framework and deployed using [Netlify](https://www.netlify.com/).
 
-    Use the Gatsby CLI to create a new site, specifying the minimal TypeScript starter.
+See it live 😍 https://wikipedia-pageviews.netlify.app/
+
+- The homepage is setup in [`src/pages/index.tsx`](https://github.com/AlyssaKirstine/wikipedia-pageviews/blob/main/src/pages/index.tsx).
+- Testing
+  - This repo is setup to support [Jest tests](https://jestjs.io/). Check out an example test in [`src/utils/article/`](https://github.com/AlyssaKirstine/wikipedia-pageviews/tree/main/src/utils/article/test.ts).
+- Code formatting
+  - This repo uses ESLint and Prettier to format the code automatically before any commits are made.
+
+## 🚀 Build Instructions
+
+1.  **Setup your local copy of this repo.**
+
+    Use `git clone` to clone this repo to your local computer.
+
+    Using HTTPS:
 
     ```shell
-    # create a new Gatsby site using the minimal TypeScript starter
-    npm init gatsby
+    git clone https://github.com/AlyssaKirstine/wikipedia-pageviews.git
     ```
 
-2.  **Start developing.**
-
-    Navigate into your new site’s directory and start it up.
+    Using SSH:
 
     ```shell
-    cd my-gatsby-site/
-    npm run develop
+    git clone git@github.com:AlyssaKirstine/wikipedia-pageviews.git
     ```
 
-3.  **Open the code and start customizing!**
+2.  **Install node modules.**
 
-    Your site is now running at http://localhost:8000!
+    Navigate to the project directory and install node modules.
 
-    Edit `src/pages/index.tsx` to see your site update in real-time!
+    ```shell
+    cd wikipedia-pageviews/
+    yarn install
+    ```
 
-4.  **Learn more**
+3.  **Build site**
 
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+    To start a development build, run `yarn start`.
 
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+    ```shell
+    yarn start
+    ```
 
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+    To start a production build, run `yarn build`. This will generate bundle files via webpack in your `public` root folder.
+    Then run `yarn serve` to serve.
 
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+    ```shell
+    yarn build
+    yarn serve
+    ```
 
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+4.  **Check it out!**
 
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter-ts)
+    Visit the applicable URL in your browser of choice.
 
-## 🚀 Quick start (Gatsby Cloud)
+    Development build: [`http://localhost:8000`](http://localhost:8000)
 
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal-ts)
+    Production build: [`http://localhost:9000`](http://localhost:9000)
