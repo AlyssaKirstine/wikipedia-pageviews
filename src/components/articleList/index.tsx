@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import 'react-datepicker/dist/react-datepicker.css';
+import { formatArticleName, getArticleUrl } from '../../utils/article';
 import {
   cardContainerStyles,
   cardStyles,
@@ -50,18 +51,10 @@ const ArticleList = ({
   }, []);
 
   const handlePinClick = (name: string) => {
-    addArticleToLocalStorage(name);
+    addArticlePin(name);
   };
 
-  const formatArticleName = (name: string) => {
-    return name.replaceAll('_', ` `);
-  };
-
-  const getArticleUrl = (name: string) => {
-    return `https://en.wikipedia.org/wiki/${name}`;
-  };
-
-  const addArticleToLocalStorage = (name: string) => {
+  const addArticlePin = (name: string) => {
     let newArticlesArray: Array<string> = [];
     const storedArticles = localStorage.getItem('articles');
 
@@ -77,7 +70,7 @@ const ArticleList = ({
     localStorage.setItem('articles', JSON.stringify(newArticlesArray));
   };
 
-  const removeArticleFromLocalStorage = (name: string) => {
+  const removeArticlePin = (name: string) => {
     let newArticlesArray: Array<string> = [];
     const storedArticles = localStorage.getItem('articles');
 
@@ -100,9 +93,7 @@ const ArticleList = ({
           {pinnedArticles?.map((article) => (
             <li key={article}>
               <a href={getArticleUrl(article)}>{formatArticleName(article)}</a>{' '}
-              <button onClick={() => removeArticleFromLocalStorage(article)}>
-                delete
-              </button>
+              <button onClick={() => removeArticlePin(article)}>delete</button>
             </li>
           ))}
         </ul>
