@@ -93,7 +93,12 @@ const ArticleList = ({
           {pinnedArticles?.map((article) => (
             <li key={article}>
               <a href={getArticleUrl(article)}>{formatArticleName(article)}</a>{' '}
-              <button onClick={() => removeArticlePin(article)}>delete</button>
+              <button
+                onClick={() => removeArticlePin(article)}
+                aria-label={`delete ${formatArticleName(article)} from pins`}
+              >
+                delete
+              </button>
             </li>
           ))}
         </ul>
@@ -108,6 +113,7 @@ const ArticleList = ({
                 <button
                   onClick={() => handlePinClick(name)}
                   css={pinIconStyles}
+                  aria-label={`Pin ${formatArticleName(name)} article`}
                 >
                   📌
                 </button>

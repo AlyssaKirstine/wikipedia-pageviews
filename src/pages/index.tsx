@@ -26,7 +26,10 @@ const HomePage = () => {
     setNumberOfResults(Number(event.target.value));
   };
 
-  const handleStartDateChange = (date: Date) => setDate(date);
+  const handleStartDateChange = (date: Date) => {
+    if (date > getYesterdaysDate()) alert('Please enter a date before today.');
+    else setDate(date);
+  };
 
   return (
     <Layout
